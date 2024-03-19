@@ -54,7 +54,7 @@ export const createApp = () => {
 	app.use(helmet());
 
 	const corsOptions = {
-		origin: ['http://localhost:3000', 'https://studio.apollographql.com'],
+		origin: ['http://localhost:3000', 'https://studio.apollographql.com, https://smart-brain-project.vercel.app/'],
 		credentials: true,
 	};
 

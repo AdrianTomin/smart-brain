@@ -23,9 +23,9 @@
         "./*"
       ]
     },
-    "exclude": [
-      "node_modules"
-    ],
-    "extends": "../frontend/tsconfig.json"
+//    "exclude": [
+//      "node_modules"
+//    ],
+//    "extends": "../frontend/tsconfig.json"
   }
 }

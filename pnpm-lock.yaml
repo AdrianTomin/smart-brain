@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+dependencies:
+  smart-brain:
+    specifier: 'link:'
+    version: 'link:'
+
 devDependencies:
   typedoc:
     specifier: ^0.25.12
