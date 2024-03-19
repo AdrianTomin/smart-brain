@@ -28,7 +28,7 @@ const Home = (): React.ReactElement => {
 		};
 
 		redirectUser();
-	}, [currentUser]);
+	}, [currentUser, router]);
 
 	return (
 		<div className={'flex justify-center items-center h-screen'}>
