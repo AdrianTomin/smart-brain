@@ -38,7 +38,7 @@ export const createApp = () => {
 	app.use(session({
 		secret: 'smart-brain-secret',
 		resave: false,
-		saveUninitialized: false,
+		saveUninitialized: true,
 	}));
 
 	//Passport middleware
