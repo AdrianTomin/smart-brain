@@ -7,8 +7,8 @@ import cors from 'cors';
 import session from 'express-session';
 import express, { NextFunction } from 'express';
 import helmet from 'helmet';
-import RedisStore from 'connect-redis';
-import Redis from 'ioredis';
+import FileStore from 'session-file-store';
+
 
 import passport from '@/utils/passport';
 
@@ -35,15 +35,16 @@ const isAuthenticated = (req: any, res: express.Response, next: NextFunction) =>
 export const createApp = () => {
 
 	const app = express();
-	const redisClient = new Redis();
 
 	//Session middleware
 	app.use(
 		session({
-			store: new RedisStore({ client: redisClient }),
+			store: new (FileStore(session))({
+				path: './sessions', // Directory to store session files
+			}),
 			secret: 'smart-brain-secret',
 			resave: false,
-			saveUninitialized: true,
+			saveUninitialized: false,
 		})
 	);
 
