@@ -1,0 +1,13 @@
+.navigation {
+  display: flex;
+  justify-content: flex-end;
+  color: white;
+}
+
+.signOut:hover{
+  color: var(--black10);
+}
+
+.account:hover {
+  color: var(--black10);
+}

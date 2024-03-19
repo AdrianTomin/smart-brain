@@ -1,0 +1,15 @@
+{
+  "entryPoints": [
+    "backend/**/*.ts",
+    "frontend/**/*.ts",
+    "frontend/**/*.tsx"
+  ],
+  "out": "docs",
+  "name": "Smart-Brain",
+  "theme": "default",
+  "exclude": [
+    "**/node_modules/**/*",
+    "**/cypress/**/*",
+    "**/*.spec.ts"
+  ]
+}

@@ -1,0 +1,10 @@
+.bgContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.image {
+  image-rendering: high-quality; /* Modern browsers */
+  object-fit: cover; /* Scales the image while maintaining its aspect ratio, cropping if necessary */
+  z-index: 1;
+}
