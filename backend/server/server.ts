@@ -33,6 +33,7 @@ const startServer = async (): Promise<void> => {
 
 		// Create Apollo Server
 		const server = new ApolloServer({
+			persistedQueries: false,
 			typeDefs,
 			resolvers,
 			context: ({ req, res }) => buildContext({ req, res, User }),
