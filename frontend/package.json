@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "start-backend": "pnpm --prefix ../backend run start",
-    "build-and-start": "pnpm run build && pnpm run start & pnpm run start-backend",
+    "install-backend": "pnpm --prefix ../backend install",
+    "build-and-start": "pnpm run install-backend && pnpm run build && pnpm run start & pnpm run start-backend",
     "cypress:open": "cypress open",
     "cypress:test": "concurrently \"pnpm run start-full \" \"pnpm run cypress:open \""
   },
