@@ -31,12 +31,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createApp = void 0;
-const path_1 = __importDefault(require("path"));
-const fs = __importStar(require("fs"));
 const cors_1 = __importDefault(require("cors"));
 const express_session_1 = __importDefault(require("express-session"));
 const express_1 = __importStar(require("express"));
-const session_file_store_1 = __importDefault(require("session-file-store"));
 const passport_1 = __importDefault(require("../utils/passport"));
 /**
  * @function isAuthenticated
@@ -52,13 +49,14 @@ const isAuthenticated = (req, res, next) => {
     }
     res.status(401).send({ message: 'Unauthorized' });
 };
-// Get the absolute path to the sessions directory
-const sessionsPath = path_1.default.join(__dirname, '../sessions');
-// Create the directory if it doesn't exist
-if (!fs.existsSync(sessionsPath)) {
-    fs.mkdirSync(sessionsPath, { recursive: true });
-}
-console.log(sessionsPath);
+// // Get the absolute path to the sessions directory
+// const sessionsPath = path.join(__dirname, '../sessions');
+//
+// // Create the directory if it doesn't exist
+// if (!fs.existsSync(sessionsPath)) {
+// 	fs.mkdirSync(sessionsPath, { recursive: true });
+// // }
+// console.log(sessionsPath);
 /**
  * @function createApp
  * @description Creates and configures the Express application.
@@ -68,9 +66,9 @@ const createApp = () => {
     const app = (0, express_1.default)();
     //Session middleware
     app.use((0, express_session_1.default)({
-        store: new ((0, session_file_store_1.default)(express_session_1.default))({
-            path: sessionsPath, // Directory to store session files
-        }),
+        // store: new (FileStore(session))({
+        // 	path: sessionsPath, // Directory to store session files
+        // }),
         secret: 'smart-brain-secret',
         resave: false,
         saveUninitialized: false,

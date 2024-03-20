@@ -30,14 +30,14 @@ const isAuthenticated = (req: any, res: express.Response, next: NextFunction) =>
 };
 
 
-// Get the absolute path to the sessions directory
-const sessionsPath = path.join(__dirname, '../sessions');
-
-// Create the directory if it doesn't exist
-if (!fs.existsSync(sessionsPath)) {
-	fs.mkdirSync(sessionsPath, { recursive: true });
-}
-console.log(sessionsPath);
+// // Get the absolute path to the sessions directory
+// const sessionsPath = path.join(__dirname, '../sessions');
+//
+// // Create the directory if it doesn't exist
+// if (!fs.existsSync(sessionsPath)) {
+// 	fs.mkdirSync(sessionsPath, { recursive: true });
+// // }
+// console.log(sessionsPath);
 
 /**
  * @function createApp
@@ -51,9 +51,9 @@ export const createApp = () => {
 	//Session middleware
 	app.use(
 		session({
-			store: new (FileStore(session))({
-				path: sessionsPath, // Directory to store session files
-			}),
+			// store: new (FileStore(session))({
+			// 	path: sessionsPath, // Directory to store session files
+			// }),
 			secret: 'smart-brain-secret',
 			resave: false,
 			saveUninitialized: false,
