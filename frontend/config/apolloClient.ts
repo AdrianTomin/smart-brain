@@ -10,7 +10,7 @@ import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
  * @description HTTP link to the GraphQL server.
  */
 const httpLink = new HttpLink({
-	uri: 'http://localhost:4000/graphql',
+	uri: 'https://smart-brain-api-nine.vercel.app/graphql', // for localhost -> http://localhost:4000/graphql
 	credentials: 'include',
 });
 
