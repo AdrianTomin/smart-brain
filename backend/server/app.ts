@@ -77,13 +77,17 @@ export const createApp = () => {
 		origin: [
 			'http://localhost:3000',
 			'https://studio.apollographql.com',
-			'https://smart-brain-project.vercel.app/',
-			'http://localhost:4000'
+			'https://smart-brain-project.vercel.app',
+			'http://localhost:4000',
+			'https://smart-brain-api-nine.vercel.app/graphql',
 		],
 		credentials: true,
 	};
 
 	app.use(cors(corsOptions));
+
+	// Handle CORS preflight requests
+	app.options('*', cors(corsOptions));
 
 	//Parse JSON bodies
 	app.use(express.json());
