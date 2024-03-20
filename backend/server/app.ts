@@ -5,11 +5,10 @@
 
 import path from 'path';
 import * as fs from 'fs';
-import bodyParser from 'body-parser';
 
 import cors from 'cors';
 import session from 'express-session';
-import express, { NextFunction } from 'express';
+import express, { json, NextFunction, urlencoded } from 'express';
 import helmet from 'helmet';
 import FileStore from 'session-file-store';
 
@@ -66,13 +65,8 @@ export const createApp = () => {
 	app.use(passport.session());
 
 	// Parse incoming request bodies
-	app.use(bodyParser.json({
-		limit: '50mb',
-	}));
-	app.use(bodyParser.urlencoded({
-		extended: true,
-		limit: '50mb',
-	}));
+	app.use(json({ limit: '50mb' }));
+	app.use(urlencoded({ limit: '50mb' }));
 
 	//app.use(helmet());
 
