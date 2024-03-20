@@ -38,6 +38,8 @@
     "@types/node": "^20.11.29",
     "@types/session-file-store": "^1.2.5",
     "nodemon": "^3.1.0",
+    "pre-commit": "^1.2.2",
+    "rimraf": "^5.0.5",
     "ts-node": "^10.9.2"
   }
 }
