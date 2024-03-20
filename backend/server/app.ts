@@ -3,14 +3,17 @@
  * @description Configures and creates the Express application with middleware and routes.
  */
 
+import path from 'path';
+import * as fs from 'fs';
+import bodyParser from 'body-parser';
+
 import cors from 'cors';
 import session from 'express-session';
 import express, { NextFunction } from 'express';
 import helmet from 'helmet';
 import FileStore from 'session-file-store';
 
-
-import passport from '@/utils/passport';
+import passport from '../utils/passport';
 
 /**
  * @function isAuthenticated
@@ -27,6 +30,16 @@ const isAuthenticated = (req: any, res: express.Response, next: NextFunction) =>
 	res.status(401).send({ message: 'Unauthorized' });
 };
 
+
+// Get the absolute path to the sessions directory
+const sessionsPath = path.join(__dirname, '../sessions');
+
+// Create the directory if it doesn't exist
+if (!fs.existsSync(sessionsPath)) {
+	fs.mkdirSync(sessionsPath, { recursive: true });
+}
+console.log(sessionsPath);
+
 /**
  * @function createApp
  * @description Creates and configures the Express application.
@@ -40,21 +53,36 @@ export const createApp = () => {
 	app.use(
 		session({
 			store: new (FileStore(session))({
-				path: './sessions', // Directory to store session files
+				path: sessionsPath, // Directory to store session files
 			}),
 			secret: 'smart-brain-secret',
 			resave: false,
 			saveUninitialized: false,
-		})
+		}),
 	);
 
 	//Passport middleware
 	app.use(passport.initialize());
 	app.use(passport.session());
-	app.use(helmet());
+
+	// Parse incoming request bodies
+	app.use(bodyParser.json({
+		limit: '50mb',
+	}));
+	app.use(bodyParser.urlencoded({
+		extended: true,
+		limit: '50mb',
+	}));
+
+	//app.use(helmet());
 
 	const corsOptions = {
-		origin: ['http://localhost:3000', 'https://studio.apollographql.com, https://smart-brain-project.vercel.app/'],
+		origin: [
+			'http://localhost:3000',
+			'https://studio.apollographql.com',
+			'https://smart-brain-project.vercel.app/',
+			'http://localhost:4000'
+		],
 		credentials: true,
 	};
 

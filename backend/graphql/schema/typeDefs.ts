@@ -1,3 +1,3 @@
-import { UserSchema } from '@/graphql/schema/UserSchema';
+import { UserSchema } from '../schema/UserSchema';
 
 export const typeDefs = [UserSchema];

@@ -7,12 +7,12 @@ import { ApolloServer } from 'apollo-server-express';
 
 import http from 'http';
 
-import { createApp } from '@/server/app';
+import { createApp } from './app';
 import { buildContext } from 'graphql-passport';
-import { connectDB, disconnectDB } from '@/database/database';
-import { User } from '@/database/models/User';
-import { resolvers } from '@/graphql/resolvers/resolvers';
-import { typeDefs } from '@/graphql/schema/typeDefs';
+import { connectDB, disconnectDB } from '../database/database';
+import { User } from '../database/models/User';
+import { resolvers } from '../graphql/resolvers/resolvers';
+import { typeDefs } from '../graphql/schema/typeDefs';
 
 
 /**
@@ -71,4 +71,7 @@ const startServer = async (): Promise<void> => {
 };
 
 // Start the server
-await startServer();
+startServer()
+	.then(() => {
+		console.log('Server started!');
+	});

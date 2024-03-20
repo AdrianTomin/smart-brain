@@ -3,7 +3,7 @@
  * @description Defines GraphQL resolver functions by combining user queries and mutations.
  */
 
-import { UserQueries, UserMutations } from '@/graphql/resolvers/UserResolvers';
+import { UserQueries, UserMutations } from './UserResolvers';
 
 /**
  * @constant resolvers

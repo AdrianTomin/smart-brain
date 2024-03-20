@@ -3,8 +3,8 @@
  * @description Defines resolver functions for user-related GraphQL queries and mutations.
  */
 
-import { User } from '@/database/models/User';
-import { comparePasswords, hashPassword } from '@/utils/passport';
+import { User } from '../../database/models/User';
+import { comparePasswords, hashPassword } from '../../utils/passport';
 
 /**
  * @interface UserSignup

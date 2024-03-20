@@ -1,31 +1,30 @@
 {
   "compilerOptions": {
-    "target": "es2022",
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext"
+      "esnext",
+      "es5",
+      "es6"
     ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": false,
-    "noEmit": true,
+    "module": "commonjs",
     "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2022",
+    "noImplicitAny": false,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "types": ["node"],
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./*"
       ]
     },
-//    "exclude": [
-//      "node_modules"
-//    ],
-//    "extends": "../frontend/tsconfig.json"
-  }
+  },
+  "exclude": [
+    "node_modules"
+  ],
 }

@@ -7,7 +7,7 @@ import bcrypt from 'bcrypt';
 import { GraphQLLocalStrategy } from 'graphql-passport';
 import passport from 'passport';
 
-import { User } from '@/database/models/User';
+import { User } from '../database/models/User';
 
 /**
  * @description Initializes authentication strategies.

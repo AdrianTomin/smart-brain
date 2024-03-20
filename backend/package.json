@@ -2,11 +2,12 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
-  "main": "index.js",
+  "main": "server/server.ts",
   "scripts": {
-    "start": "npx tsx server/server.ts",
-    "build:server": "tsc --project ./tsconfig.json"
+    "build": "npx tsc",
+    "start": "node dist/server/server.js",
+    "build-and-start-server": "pnpm run build && pnpm run start",
+    "test-server": "node dist/server.js"
   },
   "keywords": [],
   "author": "Adrian Tomin",

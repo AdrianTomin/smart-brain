@@ -8,11 +8,10 @@ import dotenv from 'dotenv';
 import path from 'path';
 
 /**
- * @constant __dirname
+ * @constant backendPath
  * @description Absolute path of the backend directory.
  */
-const __dirname = path.resolve();
-const backendPath = path.resolve(__dirname, '.');
+const backendPath = path.resolve(__dirname, '../');
 
 // Load environment variables from the .env file in the backend directory
 dotenv.config({ path: path.join(backendPath, '.env') });
