@@ -80,7 +80,10 @@ const createApp = () => {
     app.use(passport_1.default.session());
     // Parse incoming request bodies
     app.use((0, express_1.json)({ limit: '50mb' }));
-    app.use((0, express_1.urlencoded)({ limit: '50mb' }));
+    app.use((0, express_1.urlencoded)({
+        limit: '50mb',
+        extended: true,
+    }));
     //app.use(helmet());
     const corsOptions = {
         origin: [
