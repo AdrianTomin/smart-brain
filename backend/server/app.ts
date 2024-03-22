@@ -21,7 +21,9 @@ const isAuthenticated = (req: any, res: express.Response, next: NextFunction) =>
 	if (req.isAuthenticated()) {
 		return next();
 	}
-	res.status(401).send({ message: 'Unauthorized' });
+	res.status(401).send({
+		message: 'Unauthorized'
+	});
 };
 
 /**
@@ -34,8 +36,7 @@ export const createApp = () => {
 	const app = express();
 
 	//Session middleware
-	app.use(
-		session({
+	app.use(session({
 			secret: 'smart-brain-secret',
 			resave: false,
 			saveUninitialized: false,

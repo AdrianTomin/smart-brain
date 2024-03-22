@@ -48,6 +48,7 @@ const startServer = async (): Promise<void> => {
 
 		// Apply middleware to Express app
 		server.applyMiddleware({
+			path: '/graphql',
 			app,
 			cors: false,
 		});

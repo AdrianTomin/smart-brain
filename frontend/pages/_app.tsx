@@ -8,6 +8,9 @@ import { client } from '@/config/apolloClient';
 import '@/styles/globals.scss';
 import { UserProvider } from '@/contexts/UserContext';
 
+loadDevMessages();
+loadErrorMessages();
+
 export default function App({ Component, pageProps }: AppProps): React.ReactElement {
 	return (
 		<ApolloProvider client={client}>

@@ -17,6 +17,9 @@ export const USER_LOGIN_MUTATION: DocumentNode = gql`
             id
             firstName
             email
+            isActive
+            isLoggedIn
+			entries
         }
     }
 `;

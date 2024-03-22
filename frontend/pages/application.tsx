@@ -44,7 +44,7 @@ const Application = (): React.ReactElement => {
 	const router: NextRouter = useRouter();
 
 	const { refetch: refetchCurrentUser } = useQuery(GET_CURRENT_USER, {
-		fetchPolicy: 'network-only', // Ensure we always fetch from the network
+		fetchPolicy: 'cache-and-network', // Ensure we always fetch from the network
 	});
 
 	const [incrementUserEntries] = useMutation(INCREMENT_USER_ENTRIES_MUTATION);

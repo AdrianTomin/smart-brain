@@ -34,6 +34,8 @@ import { ParticleBG } from '@/components/ParticleBG';
 import { Logo } from '@/components/Logo';
 import { CustomTheme } from '@/contexts/CustomTheme';
 import styles from '../styles/Login.module.scss';
+import { useUser } from '@/contexts/UserContext';
+import { loadDevMessages, loadErrorMessages } from '@apollo/client/dev';
 
 /**
  * Component for user login.
@@ -56,7 +58,7 @@ const Login = (): React.ReactElement => {
 	const [isOpen, setIsOpen] = useState<boolean>(true);
 
 	const { refetch: refetchCurrentUser } = useQuery(GET_CURRENT_USER, {
-		fetchPolicy: 'network-only', // Ensure we always fetch from the network
+		fetchPolicy: 'network-only',
 	});
 
 	const [login] = useMutation(USER_LOGIN_MUTATION, {

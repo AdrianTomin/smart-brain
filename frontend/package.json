@@ -13,7 +13,7 @@
     "install-backend": "pnpm --prefix ../backend install",
     "install-frontend": "pnpm install",
     "install-both": "pnpm run install-backend && pnpm run install-frontend",
-    "build-and-start": "pnpm run install-backend && pnpm run build && pnpm run start && build-backend & pnpm run start-backend",
+    "build-and-start": "cross-env NODE_ENV=production pnpm run install-backend && pnpm run build && pnpm run start && build-backend & pnpm run start-backend",
     "cypress:open": "cypress open",
     "cypress:test": "concurrently \"pnpm run start-full \" \"pnpm run cypress:open \""
   },
@@ -45,6 +45,7 @@
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.17",
     "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
     "cypress": "^13.6.3",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
