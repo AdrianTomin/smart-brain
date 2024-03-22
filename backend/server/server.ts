@@ -36,6 +36,7 @@ const startServer = async (): Promise<void> => {
 			persistedQueries: false,
 			typeDefs,
 			resolvers,
+			introspection: true,
 			context: ({ req, res }) => buildContext({ req, res, User }),
 		});
 
