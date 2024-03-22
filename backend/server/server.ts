@@ -41,7 +41,7 @@ const startServer = async (): Promise<void> => {
 		});
 
 		// Create HTTP server
-		const httpServer = http.createServer(app);
+		//const httpServer = http.createServer(app);
 
 		// Start Apollo Server
 		await server.start();
@@ -54,18 +54,18 @@ const startServer = async (): Promise<void> => {
 		});
 
 		// Start HTTP server
-		httpServer.listen(PORT, (): void => {
-			console.log(`GraphQL endpoint running at http://localhost:${PORT}/graphql`);
-		});
-
-		// Handle shutdown process
-		process.on('SIGINT', async (): Promise<void> => {
-			console.log('Shutting down server...');
-			await disconnectDB();
-			httpServer.close((): void => {
-				console.log('Server shut down gracefully');
-			});
-		});
+		// httpServer.listen(PORT, (): void => {
+		// 	console.log(`GraphQL endpoint running at http://localhost:${PORT}/graphql`);
+		// });
+		//
+		// // Handle shutdown process
+		// process.on('SIGINT', async (): Promise<void> => {
+		// 	console.log('Shutting down server...');
+		// 	await disconnectDB();
+		// 	httpServer.close((): void => {
+		// 		console.log('Server shut down gracefully');
+		// 	});
+		// });
 
 	} catch (error) {
 		console.error(`Error starting server: ${error}`);
