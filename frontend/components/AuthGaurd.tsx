@@ -20,6 +20,8 @@ import { GET_CURRENT_USER } from '@/graphql/queries/GetCurrentUser';
 export const AuthGuard: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 	const { data, loading } = useQuery(GET_CURRENT_USER);
 	const user = useUser() || {};
+	console.log("User in AuthGuard", data);
+	console.log("User in AuthGuard userHook", user);
 	const { isLoggedIn, email, isActive } = user;
 	const router: NextRouter = useRouter();
 

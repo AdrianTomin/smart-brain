@@ -6,7 +6,7 @@
 import React, {
 	createContext,
 	ReactNode,
-	useContext,
+	useContext, useMemo,
 } from 'react';
 
 import { useQuery } from '@apollo/client';
@@ -14,6 +14,7 @@ import { useQuery } from '@apollo/client';
 import { GET_CURRENT_USER } from '@/graphql/queries/GetCurrentUser';
 import { UserInterface } from '../../backend/database/models/User';
 import CircularProgress from '@mui/material/CircularProgress';
+import { client } from '@/config/apolloClient';
 
 // Define the context for user data
 const UserContext = createContext<Partial<UserInterface>>({});
@@ -45,6 +46,7 @@ interface UserProviderProps {
  */
 export const UserProvider: React.FC<UserProviderProps> = ({ children }: UserProviderProps): React.ReactElement => {
 	const { loading, error, data } = useQuery(GET_CURRENT_USER);
+	console.log('Current User in User Provider', data);
 
 	// Handle error in fetching user data
 	if (error) {
@@ -57,9 +59,16 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }: UserProv
 		);
 	}
 
+	// Memoize the current user object to prevent unnecessary re-renders
+	const currentUser = useMemo(() => {
+		return data ? { ...data.getCurrentUser } : {};
+	}, [data]);
+
+	console.log('Current User memo', currentUser);
+
 	// Render loading indicator while fetching user data
 	return (
-		<UserContext.Provider value={data ? data.getCurrentUser : {}}>
+		<UserContext.Provider value={currentUser}>
 			{loading ? (
 				<div className={'flex justify-center items-center h-screen'}>
 					<CircularProgress sx={{

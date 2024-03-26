@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "build-and-start-frontend": "pnpm run build && pnpm run start",
     "start-backend": "pnpm --prefix ../backend run start",
     "build-backend": "pnpm --prefix ../backend run build",
     "install-backend": "pnpm --prefix ../backend install",
@@ -34,7 +35,8 @@
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
-    "sass": "^1.70.0"
+    "sass": "^1.70.0",
+    "sharp": "^0.33.2"
   },
   "devDependencies": {
     "@testing-library/cypress": "^10.0.1",

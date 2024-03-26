@@ -36,6 +36,7 @@ import { CustomTheme } from '@/contexts/CustomTheme';
 import styles from '../styles/Login.module.scss';
 import { useUser } from '@/contexts/UserContext';
 import { loadDevMessages, loadErrorMessages } from '@apollo/client/dev';
+import { client } from '@/config/apolloClient';
 
 /**
  * Component for user login.
@@ -58,8 +59,12 @@ const Login = (): React.ReactElement => {
 	const [isOpen, setIsOpen] = useState<boolean>(true);
 
 	const { refetch: refetchCurrentUser } = useQuery(GET_CURRENT_USER, {
-		fetchPolicy: 'network-only',
+		fetchPolicy: 'cache-and-network',
 	});
+
+	const userHook = useUser();
+
+	const { data } = useQuery(GET_CURRENT_USER);
 
 	const [login] = useMutation(USER_LOGIN_MUTATION, {
 		update: (cache, {
@@ -98,11 +103,16 @@ const Login = (): React.ReactElement => {
 		setIsLoading(true);
 
 		try {
+			console.log('Current User before login mutation', data);
+			console.log('Current User before login mutation, userHook', userHook);
 			await login({
 				variables: user,
 			});
 
-			await refetchCurrentUser();
+			console.log('Current User after login mutation and before refetch', data);
+			console.log('Current User after login mutation and before refetch with userHook', data);
+			// await refetchCurrentUser();
+			// console.log('Current User after refetch', data);
 			await router.push('/application');
 
 		} catch (error: any) {

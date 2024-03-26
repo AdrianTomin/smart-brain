@@ -24,16 +24,22 @@ import { INCREMENT_USER_ENTRIES_MUTATION } from '@/graphql/mutations/IncrementUs
 import { DataTable } from '@/components/DataTable';
 import { AuthGuard } from '@/components/AuthGaurd';
 import styles from '@/styles/Application.module.scss';
+import { useUser } from '@/contexts/UserContext';
 
 /**
  * Component for the main application page.
  * @returns {React.ReactElement} The application page component.
  */
 const Application = (): React.ReactElement => {
+	// const userHook = useUser();
+	// const { data } = useQuery(GET_CURRENT_USER);
+	// const user = data?.getCurrentUser || {};
+	// console.log("User in application page", user);
+	// console.log("User in application page userHook", userHook);
+	// const { email, isActive, isLoggedIn } = user;
 
-	const { data } = useQuery(GET_CURRENT_USER);
-	const user = data?.getCurrentUser || {};
-	const { email, isActive, isLoggedIn } = user;
+	const { email, isActive, isLoggedIn } = useUser();
+	const user = useUser();
 
 	const [inputValue, setInputValue] = useState<string>('');
 	const [isDataLoading, setIsDataLoading] = useState<boolean>(false);
@@ -51,6 +57,8 @@ const Application = (): React.ReactElement => {
 
 	useEffect(() => {
 		const checkAuthentication = async () => {
+			await refetchCurrentUser()
+			console.log({ user });
 			if (!isLoggedIn || !email || !isActive) {
 				await router.push('/login');
 			}
@@ -58,7 +66,6 @@ const Application = (): React.ReactElement => {
 
 		checkAuthentication();
 	}, [isLoggedIn, router, email, isActive]);
-
 
 	const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
 		setInputValue(event.target.value);
@@ -105,7 +112,7 @@ const Application = (): React.ReactElement => {
 			transition={{ duration: 0.5 }}
 			className={'container mx-auto px-4'}
 		>
-			<AuthGuard>
+			{/*<AuthGuard>*/}
 				<Head>
 					<title>Homepage</title>
 					<meta name="description" content="Smart Brain web application to detect the content in pictures" />
@@ -205,14 +212,15 @@ const Application = (): React.ReactElement => {
 											style={{ borderRadius: 10 }}
 											sx={{
 												'backgroundColor': 'rgb(50, 50, 62, 0.95)',
-											}} />
+											}}
+										/>
 									</div>
 								)}
 							</>
 						)}
 					</div>
 				</main>
-			</AuthGuard>
+			{/*</AuthGuard>*/}
 		</motion.div>
 	);
 };
