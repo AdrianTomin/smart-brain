@@ -103,14 +103,14 @@ const Login = (): React.ReactElement => {
 		setIsLoading(true);
 
 		try {
-			console.log('Current User before login mutation', data);
-			console.log('Current User before login mutation, userHook', userHook);
+			// console.log('Current User before login mutation', data);
+			// console.log('Current User before login mutation, userHook', userHook);
 			await login({
 				variables: user,
 			});
 
-			console.log('Current User after login mutation and before refetch', data);
-			console.log('Current User after login mutation and before refetch with userHook', data);
+			// console.log('Current User after login mutation and before refetch', data);
+			// console.log('Current User after login mutation and before refetch with userHook', data);
 			// await refetchCurrentUser();
 			// console.log('Current User after refetch', data);
 			await router.push('/application');

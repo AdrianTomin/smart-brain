@@ -46,7 +46,7 @@ interface UserProviderProps {
  */
 export const UserProvider: React.FC<UserProviderProps> = ({ children }: UserProviderProps): React.ReactElement => {
 	const { loading, error, data } = useQuery(GET_CURRENT_USER);
-	console.log('Current User in User Provider', data);
+	//console.log('Current User in User Provider', data);
 
 	// Handle error in fetching user data
 	if (error) {
