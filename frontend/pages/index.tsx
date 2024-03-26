@@ -18,7 +18,7 @@ const Home = (): React.ReactElement => {
 	const router: NextRouter = useRouter();
 	const currentUser = useUser();
 
-	console.log("Current user in index", currentUser);
+	//console.log("Current user in index", currentUser);
 	useEffect(() => {
 		const redirectUser = async () => {
 			if (currentUser && currentUser.isLoggedIn && currentUser.isActive) {
