@@ -86,8 +86,9 @@ exports.UserMutations = {
             throw new Error('Account is not active.');
         }
         user.isLoggedIn = true;
-        await context.login(user);
-        return await user.save();
+        const savedUser = await user.save(); // Save the user first
+        await context.login(savedUser); // Call login with the saved user
+        return savedUser;
     },
     /**
      * @async

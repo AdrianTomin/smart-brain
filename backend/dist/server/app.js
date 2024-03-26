@@ -34,6 +34,7 @@ exports.createApp = void 0;
 const cors_1 = __importDefault(require("cors"));
 const express_session_1 = __importDefault(require("express-session"));
 const express_1 = __importStar(require("express"));
+const connect_mongo_1 = __importDefault(require("connect-mongo"));
 const passport_1 = __importDefault(require("../utils/passport"));
 /**
  * @function isAuthenticated
@@ -47,42 +48,38 @@ const isAuthenticated = (req, res, next) => {
     if (req.isAuthenticated()) {
         return next();
     }
-    res.status(401).send({ message: 'Unauthorized' });
+    res.status(401).send({
+        message: 'Unauthorized',
+    });
 };
-// // Get the absolute path to the sessions directory
-// const sessionsPath = path.join(__dirname, '../sessions');
-//
-// // Create the directory if it doesn't exist
-// if (!fs.existsSync(sessionsPath)) {
-// 	fs.mkdirSync(sessionsPath, { recursive: true });
-// // }
-// console.log(sessionsPath);
 /**
  * @function createApp
  * @description Creates and configures the Express application.
  * @returns Configured Express application.
  */
 const createApp = () => {
+    const PORT = Number.parseInt(process.env.PORT) || 4000;
     const app = (0, express_1.default)();
     //Session middleware
     app.use((0, express_session_1.default)({
-        // store: new (FileStore(session))({
-        // 	path: sessionsPath, // Directory to store session files
-        // }),
-        secret: 'smart-brain-secret',
+        secret: process.env.JWT_SECRET,
         resave: false,
         saveUninitialized: false,
+        store: connect_mongo_1.default.create({
+            mongoUrl: process.env.MONGO_URI,
+        }),
     }));
     //Passport middleware
     app.use(passport_1.default.initialize());
     app.use(passport_1.default.session());
     // Parse incoming request bodies
-    app.use((0, express_1.json)({ limit: '50mb' }));
+    app.use((0, express_1.json)({
+        limit: '50mb',
+    }));
     app.use((0, express_1.urlencoded)({
         limit: '50mb',
         extended: true,
     }));
-    //app.use(helmet());
     const corsOptions = {
         origin: [
             'http://localhost:3000',
@@ -104,10 +101,12 @@ const createApp = () => {
      * Otherwise, responds with status 401 Unauthorized.
      */
     app.post('/check-auth', isAuthenticated, (_req, res) => {
-        console.log('check-auth route hit with POST method');
         res.status(200).send({
             message: 'Authenticated',
         });
+    });
+    app.listen(PORT, () => {
+        console.log(`Server listening on port ${PORT}`);
     });
     return app;
 };

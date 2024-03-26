@@ -10,6 +10,7 @@
     "module": "commonjs",
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "strict": false,
     "allowSyntheticDefaultImports": true,
     "target": "es2022",
     "noImplicitAny": false,
@@ -22,7 +23,7 @@
       "@/*": [
         "./*"
       ]
-    },
+    }
   },
   "exclude": [
     "node_modules"

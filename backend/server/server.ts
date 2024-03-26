@@ -14,6 +14,7 @@ import { User } from '../database/models/User';
 import { resolvers } from '../graphql/resolvers/resolvers';
 import { typeDefs } from '../graphql/schema/typeDefs';
 
+const PORT = Number.parseInt(process.env.PORT) || 4000;
 
 /**
  * @function startServer
@@ -21,10 +22,8 @@ import { typeDefs } from '../graphql/schema/typeDefs';
  * @returns A promise that resolves when the server has started successfully.
  */
 const startServer = async (): Promise<void> => {
-	const PORT: number = 4000;
 
 	try {
-
 		//Connect to database
 		await connectDB();
 
@@ -37,35 +36,17 @@ const startServer = async (): Promise<void> => {
 			typeDefs,
 			resolvers,
 			introspection: true,
-			context: ({ req, res }) => buildContext({ req, res, User }),
+			context: ({ req, res }) => buildContext({ req, res, User } as any),
 		});
-
-		// Create HTTP server
-		//const httpServer = http.createServer(app);
 
 		// Start Apollo Server
 		await server.start();
 
 		// Apply middleware to Express app
 		server.applyMiddleware({
-			path: '/graphql',
 			app,
 			cors: false,
 		});
-
-		// Start HTTP server
-		// httpServer.listen(PORT, (): void => {
-		// 	console.log(`GraphQL endpoint running at http://localhost:${PORT}/graphql`);
-		// });
-		//
-		// // Handle shutdown process
-		// process.on('SIGINT', async (): Promise<void> => {
-		// 	console.log('Shutting down server...');
-		// 	await disconnectDB();
-		// 	httpServer.close((): void => {
-		// 		console.log('Server shut down gracefully');
-		// 	});
-		// });
 
 	} catch (error) {
 		console.error(`Error starting server: ${error}`);
@@ -75,5 +56,5 @@ const startServer = async (): Promise<void> => {
 // Start the server
 startServer()
 	.then(() => {
-		console.log('Server started!');
+		console.log(`Server started on port ${PORT}!`);
 	});

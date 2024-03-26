@@ -56,8 +56,8 @@ export const UserQueries = {
 	 * @param {any} context - Context object containing authentication information.
 	 * @returns {Promise<any>} The currently authenticated user.
 	 */
-	async getCurrentUser(_parent: unknown, _args: unknown, context: any): Promise<any> {
-		return await context.getUser();
+	 async getCurrentUser(_parent: unknown, _args: unknown, context: any): Promise<any> {
+		 return await context.getUser();
 	},
 };
 
@@ -134,9 +134,10 @@ export const UserMutations = {
 		}
 
 		user.isLoggedIn = true;
-		await context.login(user);
+		const savedUser = await user.save(); // Save the user first
+		await context.login(savedUser); // Call login with the saved user
 
-		return await user.save();
+		return savedUser;
 	},
 
 	/**
