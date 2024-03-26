@@ -57,8 +57,6 @@ const Application = (): React.ReactElement => {
 
 	useEffect(() => {
 		const checkAuthentication = async () => {
-			await refetchCurrentUser()
-			console.log({ user });
 			if (!isLoggedIn || !email || !isActive) {
 				await router.push('/login');
 			}
