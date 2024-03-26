@@ -64,7 +64,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }: UserProv
 		return data ? { ...data.getCurrentUser } : {};
 	}, [data]);
 
-	console.log('Current User memo', currentUser);
+	//console.log('Current User memo', currentUser);
 
 	// Render loading indicator while fetching user data
 	return (
